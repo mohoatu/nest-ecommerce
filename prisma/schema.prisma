@@ -29,6 +29,7 @@ model User {
   orders    Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  profile   Profile?
 
   @@map("users")
 }
@@ -84,4 +85,15 @@ model OrderItem {
   updatedAt DateTime @updatedAt
 
   @@map("order_items")
+}
+
+model Profile {
+  id        String  @id @default(uuid())
+  firstName String
+  lastName  String
+  phone     String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String  @unique
+
+  @@map("profiles")
 }
