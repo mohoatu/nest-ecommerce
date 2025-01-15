@@ -22,54 +22,68 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+# NestJS E-commerce API
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A NestJS-based e-commerce API with GraphQL support, user authentication, and role-based access control.
 
-## Project setup
+## Project Setup
 
 ```bash
+# Install dependencies
 $ npm install
-```
 
-## Compile and run the project
+# Set up the database
+$ npx prisma migrate dev
+$ npx prisma db seed
 
-```bash
-# development
-$ npm run start
-
-# watch mode
+# Start the development server
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Run tests
+## Authentication
 
-```bash
-# unit tests
-$ npm run test
+The API uses JWT-based authentication. After seeding the database, you can login with these credentials:
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### Admin User
+```graphql
+mutation {
+  login(loginInput: {
+    email: "admin@example.com"
+    password: "admin123"
+  }) {
+    accessToken
+    user {
+      email
+      role
+    }
+  }
+}
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
+### Regular User
+```graphql
+mutation {
+  login(loginInput: {
+    email: "user@example.com"
+    password: "user123"
+  }) {
+    accessToken
+    user {
+      email
+      role
+    }
+  }
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Use the returned `accessToken` in subsequent requests by adding it to the HTTP headers:
+```json
+{
+  "Authorization": "Bearer your_access_token_here"
+}
+```
 
 ## Resources
 
