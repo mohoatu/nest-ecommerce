@@ -1,0 +1,76 @@
+<!-- views/index.hbs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .endpoint {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .endpoint h2 {
+            margin-top: 0;
+            color: #495057;
+        }
+        code {
+            background-color: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .links {
+            margin-top: 30px;
+        }
+        .links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{title}}</h1>
+    
+    <div class="endpoint">
+        <h2>GraphQL Endpoint</h2>
+        <p>The GraphQL API is available at: <code>{{graphqlEndpoint}}</code></p>
+        <p>You can explore the API using the GraphQL Playground at this endpoint.</p>
+    </div>
+
+    <div class="endpoint">
+        <h2>Getting Started</h2>
+        <p>To use the API:</p>
+        <ol>
+            <li>Visit the GraphQL Playground at <code>{{graphqlEndpoint}}</code></li>
+            <li>Create a new user using the <code>createUser</code> mutation</li>
+            <li>Login using the <code>login</code> mutation to get an access token</li>
+            <li>Use the access token in the Authorization header: <code>Bearer your-token</code></li>
+        </ol>
+    </div>
+
+    <div class="links">
+        <a href="{{graphqlEndpoint}}">Open GraphQL Playground</a>
+        <a href="https://docs.nestjs.com" target="_blank">NestJS Documentation</a>
+    </div>
+</body>
+</html>
