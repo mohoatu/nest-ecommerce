@@ -7,6 +7,23 @@ type Auth {
   user: User!
 }
 
+type Category {
+  createdAt: DateTime!
+  description: String
+  id: String!
+  name: String!
+  products: [Product!]
+  updatedAt: DateTime!
+}
+
+input CreateProductInput {
+  categoryId: String!
+  description: String
+  name: String!
+  price: Float!
+  stock: Float!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -25,14 +42,31 @@ input LoginInput {
 }
 
 type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
   createUser(createUserInput: CreateUserInput!): User!
   login(loginInput: LoginInput!): Auth!
+  removeProduct(id: String!): Product!
   removeUser(id: ID!): Boolean!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Product {
+  category: Category!
+  categoryId: String!
+  createdAt: DateTime!
+  description: String
+  id: String!
+  name: String!
+  price: Float!
+  stock: Float!
+  updatedAt: DateTime!
 }
 
 type Query {
   me: User!
+  product(id: String!): Product!
+  products: [Product!]!
   user(id: ID!): User!
   users: [User!]!
 }
@@ -41,6 +75,15 @@ type Query {
 enum Role {
   ADMIN
   USER
+}
+
+input UpdateProductInput {
+  categoryId: String
+  description: String
+  id: String!
+  name: String
+  price: Float
+  stock: Float
 }
 
 input UpdateUserInput {
